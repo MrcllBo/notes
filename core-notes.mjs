@@ -31,13 +31,16 @@ const addNote = function (title, body) {
 }
 
 const removeNote = function (title) {
-    const notes = [];
-    const notesToKeep = [];
+    const notes = loadNotes()
+    const notesToKeep = notes.filter(function (note) {
+        return note.title !== title
+    })
 
-    if (true) {
-        //
+    if (notes.length > notesToKeep.length) {
+        console.log(chalk.green.inverse('Nota rimossa'));
+        saveNotes(notesToKeep)
     } else {
-        //
+        errorHelper();
     }
 }
 
@@ -55,13 +58,13 @@ const listNotes = function () {
 }
 
 const readNote = function (title) {
-    const notes = [];
+    const notes = loadNotes();
     const noteExist = findNote(notes, title);
 
     if (noteExist) {
-        //
+        displayNote(noteExist)
     } else {
-        //
+        errorHelper();
     }
 }
 
